@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "/home/merot/.config/herd-lite/bin/php",
+            "args": [
+                "/mnt/c/Users/merot/dev/laravel-app/task-manager/artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}

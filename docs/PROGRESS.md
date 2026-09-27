@@ -3,13 +3,13 @@
 ## 現在の状態
 - Laravel 13 の初期状態（`laravel new` 直後）
 - 進捗記録の仕組みを用意した（このファイル）
-- WSL に PHP / Composer が未インストール
+- 開発環境の準備が完了（PHP 8.5 / Composer / Laravel Boost）
 
 ## 全体 TODO
 - [x] 進捗記録ファイルを作成
-- [ ] WSL に PHP / Composer をインストール
-- [ ] 初回コミット
-- [ ] Laravel Boost をインストール
+- [x] WSL に PHP / Composer をインストール
+- [x] 初回コミット
+- [x] Laravel Boost をインストール
 - [ ] DB 設定（SQLite 推奨）
 - [ ] Todo アプリ MVP
   - [ ] Task モデル / マイグレーション / Factory
@@ -24,9 +24,14 @@
 ### やったこと
 - プロジェクトの現状を確認した（独自機能は未実装、コミット0件）
 - `docs/PROGRESS.md` を作成し、CLAUDE.md に進捗記録のルールを追記した
+- php.new で PHP 8.5 / Composer 2.8 を WSL に導入した（`~/.config/herd-lite/bin`、PATH は `.bashrc` に追記済み）
+- 初回コミットを作成した
+- Laravel Boost 2.10 を導入した（guidelines / skills / MCP）
+  - Boost が書き換えたのは AGENTS.md のみ → CLAUDE.md は `@AGENTS.md` で読み込む形に変更
+  - `.mcp.json` が `wsl.exe` 経由になっていたので、php を直接呼ぶ形に修正
 
 ### 次にやること
-- WSL に PHP / Composer を入れる → 初回コミット → Boost → Todo MVP
+- DB を決める（SQLite 推奨）→ Todo MVP
 
 ### メモ
 - 作るもの: Todo（タスク管理）アプリ
