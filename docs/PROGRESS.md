@@ -10,7 +10,7 @@
 - [x] WSL に PHP / Composer をインストール
 - [x] 初回コミット
 - [x] Laravel Boost をインストール
-- [ ] DB 設定（SQLite 推奨）
+- [x] DB 設定（SQLite）
 - [ ] Todo アプリ MVP
   - [ ] Task モデル / マイグレーション / Factory
   - [ ] TaskController（CRUD + 完了切り替え）
@@ -30,9 +30,12 @@
   - Boost が書き換えたのは AGENTS.md のみ → CLAUDE.md は `@AGENTS.md` で読み込む形に変更
   - `.mcp.json` が `wsl.exe` 経由になっていたので、php を直接呼ぶ形に修正
 
+- DB を SQLite に切り替えた（`.env` の `DB_CONNECTION=sqlite`）
+- 進め方を決めた: **コードは自分で書き、Claude は解説・ヒント・レビュー担当**（Claude が先に書いた Todo コードは破棄した）
+
 ### 次にやること
-- DB を決める（SQLite 推奨）→ Todo MVP
+- Todo MVP（自分で実装）: まず Task モデル + マイグレーションから
 
 ### メモ
 - 作るもの: Todo（タスク管理）アプリ
-- `.env` は `DB_CONNECTION=mysql`。SQLite に切り替えるかは未決定
+- このプロジェクトは Laravel の学習が目的。理解しながら進める
