@@ -1,0 +1,25 @@
+{
+    "hooks": {
+        "SessionStart": [
+            {
+                "matcher": "startup|resume",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "echo '{\"systemMessage\": \"📋 作業開始時は /start で進捗確認、終わるときは /end で記録しましょう\"}'"
+                    }
+                ]
+            }
+        ],
+        "Stop": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "f=\"$CLAUDE_PROJECT_DIR/docs/PROGRESS.md\"; d=\"/mnt/c/Users/merot/OneDrive/task-manager/PROGRESS.md\"; [ -f \"$f\" ] && ! cmp -s \"$f\" \"$d\" && cp \"$f\" \"$d\"; exit 0"
+                    }
+                ]
+            }
+        ]
+    }
+}
