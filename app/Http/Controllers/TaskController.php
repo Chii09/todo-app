@@ -18,6 +18,9 @@ class TaskController extends Controller
     }
 
     public function store(Request $request) {
+        $request->validate([
+            'title' => 'required|max:255',
+        ]);
         $task = new Task;
         $task->title = $request->input('title');
         $task->save();
