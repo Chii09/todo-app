@@ -5,9 +5,9 @@
 > **使い方:** 作業開始時に `/start`、終了時に `/end`
 
 ## 📍 現在地
-- **進捗:** 約 60%（ステップ 0〜4 完了、5 はほぼ完了）
-- **今いるステップ:** 5. 入力チェック（バリデーションは動いた。メッセージが英語）
-- **次の一歩:** バリデーションのメッセージを日本語にする
+- **進捗:** 約 60%（ステップ 0〜5 完了）
+- **今いるステップ:** 6. 編集
+- **次の一歩:** ルートパラメータ（`/tasks/{task}/edit` の `{task}`）の考え方を学ぶ
 - **やりかけ:** updated_at の実験（何も変えずに `save()` すると updated_at はどうなるか）※任意
 
 ## 🗺️ ロードマップ
@@ -18,7 +18,7 @@
 | 2 | モデルでデータ操作 | ✅ | 小 | PHP の基本、Eloquent、tinker |
 | 3 | 一覧表示 | ✅ | **大** | ルーティング、コントローラー、Blade |
 | 4 | 追加 | ✅ | 中 | フォーム、POST、CSRF |
-| 5 | 入力チェック | 🔶 | 小 | バリデーション |
+| 5 | 入力チェック | ✅ | 小 | バリデーション |
 | 6 | 編集 | ⬜ | 中 | ルートパラメータ、PUT/PATCH |
 | 7 | 完了 / 未完了の切り替え | ⬜ | 小 | 更新の応用 |
 | 8 | 削除 | ⬜ | 小 | DELETE |
@@ -42,6 +42,9 @@
 - 変数は `new` で作ってから使う（`$task = new Task;` を忘れると Undefined variable）
 - `Parse error: unexpected ...` は、エラーの出た行の**1つ前の行**の `;` 忘れを疑う
 - `validate()` のキーは入力欄の `name`（`'title'`）
+- `max` のメッセージはチェック対象ごとに分かれている。文字列（title）に使われるのは `'string'`（`'array'` と書くと英語のまま）
+- `'attributes'` は対応表なので `'title' => 'タイトル'` のようにキー（入力欄の name）と値の両方を書く
+- bash（WSL）でコマンドを改行するのは `\`（日本語キーボードでは「ろ」か「¥」キー）。`` ` `` は PowerShell 用
 - id=1 のタスクの due_date が `2026-9-30`（0 なし）で保存されている → フォーム作成時に正しい形式で保存する仕組みを入れる
 
 ## 🔧 環境メモ
@@ -51,11 +54,28 @@
 - `~/dev/task-manager` は 9 月に Sail で作った別のプロジェクト（触らない）
 - PHP は `~/.config/herd-lite/bin`（php.new で導入）。DB は SQLite（`database/database.sqlite`）
 - スマホでは OneDrive アプリの `task-manager/PROGRESS.md` で見られる（Claude の応答が終わるたびに自動で同期される）
+- 言語は `.env` の `APP_LOCALE=ja`。日本語メッセージは `lang/ja/validation.php`（ないものは `lang/en` が使われる）
+- VS Code の WSL モードでは、PHP などの拡張機能を「WSL: Ubuntu にインストール」する必要がある
+- サーバーは別タブで起動（`wsl` → `cd ~/dev/todo-app` → `php artisan serve`）
 - タイムゾーンは `Asia/Tokyo`（id=1 のタスクは変更前に UTC で保存されたもの）
 
 ---
 
 # 📓 作業日誌
+
+## 2026-10-02
+### やったこと
+- 復習クイズ: `validate()` のキーは入力欄の `name`（`'title'`）→ 正解
+- バリデーションのメッセージを日本語化 → **ステップ5 完了**
+  - `php artisan lang:publish` で `lang/en/validation.php` を出し、メッセージ集の仕組み（`:attribute` `:max` の穴あき部分、fallback）を学んだ
+  - `max` がチェック対象ごと（array / file / numeric / string）に分かれている理由を理解した
+  - `lang/ja/validation.php` に `required` と `max.string` を自分で書き、`.env` を `APP_LOCALE=ja` に変更
+  - `'attributes'` で `title` を「タイトル」と表示するようにした
+  - つまずき: `max` のキーを `'array'` にした、`'attributes'` に値だけ書いた → 自分で修正
+- VS Code の WSL モードでの拡張機能、bash での改行（`\`）を確認
+
+### 次にやること
+- ステップ6（編集）: ルートパラメータ、編集フォーム、PUT/PATCH
 
 ## 2026-10-01
 ### やったこと
