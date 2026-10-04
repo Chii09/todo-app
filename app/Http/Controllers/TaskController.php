@@ -17,11 +17,27 @@ class TaskController extends Controller
         return view('tasks.create');
     }
 
+    public function edit($id)
+    {
+        $task = Task::findOrFail($id);
+        return view('tasks.edit', ['task' => $task]);
+    }
+
     public function store(Request $request) {
         $request->validate([
             'title' => 'required|max:255',
         ]);
         $task = new Task;
+        $task->title = $request->input('title');
+        $task->save();
+        return redirect('/tasks');
+    }
+
+    public function update(Request $request, $id) {
+        $task = Task::findOrFail($id);
+        $request->validate([
+            'title' => 'required|max:255',
+        ]);
         $task->title = $request->input('title');
         $task->save();
         return redirect('/tasks');
