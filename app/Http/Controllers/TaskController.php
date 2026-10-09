@@ -42,4 +42,11 @@ class TaskController extends Controller
         $task->save();
         return redirect('/tasks');
     }
+
+    public function toggle($id) {
+        $task = Task::findOrFail($id);
+        $task->is_completed = !$task->is_completed;
+        $task->save();
+        return redirect('/tasks');
+    }
 }

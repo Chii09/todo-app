@@ -15,3 +15,5 @@ Route::post('/tasks', [TaskController::class, 'store']);
 Route::get('/tasks/{id}/edit', [TaskController::class, 'edit']);
 
 Route::put('/tasks/{id}', [TaskController::class, 'update']);
+
+Route::patch('/tasks/{id}/toggle', [TaskController::class, 'toggle']);
