@@ -11,6 +11,11 @@
                 @method('PATCH')
                 <button type="submit">切り替え</button>
             </form>
+            <form method="POST" action="/tasks/{{ $task->id }}">
+                @csrf
+                @method('DELETE')
+                <button type="submit">削除</button>
+            </form>
     </li>
     @endforeach
 </ul>
