@@ -6,8 +6,8 @@
 
 ## 📍 現在地
 - **進捗:** 約 90%（ステップ 0〜8 完了）
-- **今いるステップ:** 9. 見た目を整える
-- **次の一歩:** Tailwind CSS の導入状況を確認し、一覧画面の見た目を整える
+- **今いるステップ:** 9. 見た目を整える（一覧画面に Tailwind を適用中）
+- **次の一歩:** 一覧の仕上げ（編集リンクの見た目、完了タスクに取り消し線、「＋ タスクを追加」ボタン）→ 追加・編集画面
 - **やりかけ:** updated_at の実験（何も変えずに `save()` すると updated_at はどうなるか）※任意
 
 ## 🗺️ ロードマップ
@@ -22,7 +22,7 @@
 | 6 | 編集 | ✅ | 中 | ルートパラメータ、PUT/PATCH |
 | 7 | 完了 / 未完了の切り替え | ✅ | 小 | 更新の応用 |
 | 8 | 削除 | ✅ | 小 | DELETE |
-| 9 | 見た目を整える | ⬜ | 小〜中 | Tailwind CSS |
+| 9 | 見た目を整える | 🔶 | 小〜中 | Tailwind CSS |
 
 **％の目安:** 0〜2 で 20% / 3 で 45% / 4〜5 で 60% / 6 で 75% / 7〜8 で 90% / 9 で 100%
 
@@ -59,6 +59,9 @@
 - `<form>` に `method` を書かないと GET（デフォルト）で送られる
 - ビュー（blade.php）が必要なのは画面を見せるときだけ。`redirect` で終わる `store` / `update` / `toggle` / `destroy` には不要
 - `confirm('...')` だけでは聞くだけ。`return confirm('...')` で送信を止められる
+- Tailwind のクラスは必ず `class="..."` の中に書く（`<ul flex>` だと別々の属性と思われて無視される）
+- `hover:bg-〇〇` は乗せたときだけ。ふだんの色（`bg-〇〇-500`）も別に必要
+- `flex` は「並べたいもの」ではなく、それを包む **親** に付ける。横は `flex`、縦は `flex flex-col`
 - `validate` はエラーを見つける役、`@error` は画面に出す役。フォームごとに `@error` が必要
 - id=1 のタスクの due_date が `2026-9-30`（0 なし）で保存されている → フォーム作成時に正しい形式で保存する仕組みを入れる
 
@@ -67,6 +70,7 @@
 - 開き方: PowerShell で `wsl` → `cd ~/dev/todo-app` → `code .`（VS Code を WSL モードで開く）/ `claude`
 - 旧フォルダ `C:\Users\merot\dev\laravel-app\task-manager` はバックアップとして残してある（使わない）
 - `~/dev/task-manager` は 9 月に Sail で作った別のプロジェクト（触らない）
+- 作業中のタブ: Claude Code / `php artisan serve` / `npm run dev`（Tailwind の CSS を作る係）
 - PHP は `~/.config/herd-lite/bin`（php.new で導入）。DB は SQLite（`database/database.sqlite`）
 - スマホでは OneDrive アプリの `task-manager/PROGRESS.md` で見られる（Claude の応答が終わるたびに自動で同期される）
 - 言語は `.env` の `APP_LOCALE=ja`。日本語メッセージは `lang/ja/validation.php`（ないものは `lang/en` が使われる）
@@ -77,6 +81,19 @@
 ---
 
 # 📓 作業日誌
+
+## 2026-10-13
+### やったこと
+- プロジェクトの目的・現在地を確認（MVP の機能はすべて完成、残りは見た目）
+- ステップ9（見た目を整える）開始
+  - `npm install` と `npm run dev` で Tailwind CSS（v4）を使える状態にした
+  - `index.blade.php` を HTML の骨組み（`<!DOCTYPE html>`、`<head>`、`<body>`）で包み、`<head>` に `@vite(['resources/css/app.css'])` を書いた
+  - レッスン10: CSS と Tailwind（クラス名は「何を-どれくらい」、数字 1 = 4px、色の濃さ 50〜950、`hover:`）
+  - `<body class="p-6">`、`<h1 class="text-2xl font-bold mb-4">`、`<ul class="flex flex-col gap-2">`、`<li class="flex items-center gap-2">`、ボタンに色・余白・角丸・hover
+  - つまずき: ボタンに `hover:` だけ付けた、`<ul flex flex-col gap-2>`（`class=` 忘れ）
+
+### 次にやること
+- 一覧の仕上げ（編集リンク、完了タスクに取り消し線、追加ボタン）→ 追加・編集画面にも骨組みと Tailwind
 
 ## 2026-10-11
 ### やったこと
